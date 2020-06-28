@@ -420,7 +420,7 @@ class Device(object):
 
     @cmd_convert_bytes
     def _cmd_all_with_type(self):
-        cmd = Popen('smartctl -d {0} -a {1}'.format(
+        cmd = Popen('/usr/sbin/smartctl -d {0} -a {1}'.format(
             self._get_device_type(), self.path), shell=True,
             stdout=PIPE, stderr=PIPE)
         return cmd.communicate()
@@ -428,7 +428,7 @@ class Device(object):
     @cmd_convert_bytes
     def _cmd_all(self):
         cmd = Popen(
-            'smartctl -a {0}'.format(self.path),
+            '/usr/sbin/smartctl -a {0}'.format(self.path),
             shell=True,
             stdout=PIPE,
             stderr=PIPE,
@@ -438,7 +438,7 @@ class Device(object):
     @cmd_convert_bytes
     def _cmd_power_on_scan(self):
         cmd = Popen(
-            'smartctl -d scsi -l background {0}'.format(self.path),
+            '/usr/sbin/smartctl -d scsi -l background {0}'.format(self.path),
             shell=True,
             stdout=PIPE,
             stderr=PIPE,
@@ -448,7 +448,7 @@ class Device(object):
     @cmd_convert_bytes
     def _cmd_run_test(self, test_type):
         cmd = Popen(
-            'smartctl -d {0} -t {1} {2}'.format(
+            '/usr/sbin/smartctl -d {0} -t {1} {2}'.format(
                 self._get_device_type(),
                 test_type,
                 self.path,
@@ -462,7 +462,7 @@ class Device(object):
     @cmd_convert_bytes
     def _cmd_get_capabilities(self):
         cmd = Popen(
-            'smartctl -d {0} -c {1}'.format(
+            '/usr/sbin/smartctl -d {0} -c {1}'.format(
                 self._get_device_type(),
                 self.path
             ),
@@ -475,7 +475,7 @@ class Device(object):
     @cmd_convert_bytes
     def _cmd_sataphy(self, test):
         cmd = Popen(
-            'smartctl -d {0} -l sataphy {1}'.format(
+            '/usr/sbin/smartctl -d {0} -l sataphy {1}'.format(
                 smartctl_type[test], self.path
             ),
             shell=True,
@@ -487,7 +487,7 @@ class Device(object):
     @cmd_convert_bytes
     def _cmd_sasphy(self):
         cmd = Popen(
-            'smartctl -d scsi -l sasphy {0}'.format(self.path),
+            '/usr/sbin/smartctl -d scsi -l sasphy {0}'.format(self.path),
             shell=True,
             stdout=PIPE,
             stderr=PIPE
@@ -497,7 +497,7 @@ class Device(object):
     @cmd_convert_bytes
     def _cmd_scsi_all(self):
         cmd = Popen(
-            'smartctl -d scsi -a {0}'.format(self.path),
+            '/usr/sbin/smartctl -d scsi -a {0}'.format(self.path),
             shell=True,
             stdout=PIPE,
             stderr=PIPE,
@@ -507,7 +507,7 @@ class Device(object):
     @cmd_convert_bytes
     def _cmd_scan_open(self, grep_cmd_name):
         cmd = Popen(
-            'smartctl --scan-open | {0} "{1}"'.format(
+            '/usr/sbin/smartctl --scan-open | {0} "{1}"'.format(
                 grep_cmd_name,
                 self.name,
             ),
